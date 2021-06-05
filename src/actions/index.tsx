@@ -4,7 +4,7 @@ import { IAction, Dispatch, ICountry } from '../interfaces'
 
 export const getCases = () => async (dispatch: Dispatch) => {
   const response = await axios.get("https://covid-api.mmediagroup.fr/v1/cases");
-  let countries = Object.entries(response.data).map((country: ICountry | any) => ({
+  let countries = Object.entries(response.data).map((country:) => ({
     [country[0]]: country[1].All,
   }));
   dispatch({ type: GET_CASES, payload: countries });

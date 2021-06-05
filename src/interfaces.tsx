@@ -11,5 +11,16 @@ export interface ICountry {
     deaths: number
     recovered: number
     confirmed: number
+    country: string
+    sq_km_area: number
+    life_expectancy: string
+    elevation_in_meters: number
+    abbreviation: string
+    location: string
+    iso: number
+    capital_city: string
+    lat: string
+    long: string
+    updated: string
 
 }
