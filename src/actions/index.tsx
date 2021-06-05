@@ -1,9 +1,10 @@
 import axios from "axios";
 import { GET_CASES, GET_VACCINES } from "./types";
+import { IAction, Dispatch, ICountry } from '../interfaces'
 
-export const getCases = () => async (dispatch) => {
+export const getCases = () => async (dispatch: Dispatch) => {
   const response = await axios.get("https://covid-api.mmediagroup.fr/v1/cases");
-  let countries = Object.entries(response.data).map((country) => ({
+  let countries = Object.entries(response.data).map((country: ICountry | any) => ({
     [country[0]]: country[1].All,
   }));
   dispatch({ type: GET_CASES, payload: countries });

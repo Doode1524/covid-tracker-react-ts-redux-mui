@@ -3,6 +3,8 @@ import CasesList from "../components/CasesList";
 import { connect, useDispatch } from "react-redux";
 import { getCases } from "../actions";
 
+// JSX.ElementChildrenAttribute  => props
+
 const Cases = (props) => {
   
   const dispatch = useDispatch();
