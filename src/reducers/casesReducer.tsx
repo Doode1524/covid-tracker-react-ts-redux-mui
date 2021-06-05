@@ -3,7 +3,7 @@ import { IAction, Dispatch, ICountry } from '../interfaces'
 
 const INITIAL_STATE = { cases: [], vaccines: [] };
 
-export default (state = INITIAL_STATE, action: IAction) => {
+const casesReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
     case GET_CASES:
       return { ...state, cases: action.payload };
@@ -14,6 +14,9 @@ export default (state = INITIAL_STATE, action: IAction) => {
   }
 };
 
+export type RootState = ReturnType<typeof casesReducer>
+
+export default casesReducer
 // const getCases = () => {
 //     fetch("https://covid-api.mmediagroup.fr/v1/cases")
 //       .then((res) => res.json())

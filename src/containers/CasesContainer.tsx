@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import CasesList from "../components/CasesList";
 import { connect, useDispatch } from "react-redux";
 import { getCases } from "../actions";
+import { RootState } from "../reducers/casesReducer";
 
-const Cases = (props) => {
+const Cases = ({cases}: {cases: any}) => {
   
   const dispatch = useDispatch();
 
@@ -15,18 +16,18 @@ const Cases = (props) => {
     dispatch(getCases());
   };
 
-  if (props.cases.length === 0) {
+  if (cases.length === 0) {
     return <div>Loading</div>;
   }
 
   return (
     <div>
-      <CasesList cases={props.cases} />
+      <CasesList cases={cases} />
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     cases: state.cases,
   };

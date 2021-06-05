@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles, Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,17 +8,32 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: "#B2B2B2",
-    color: theme.palette.common.black,
-    fontSize: 22,
-    fontWeight: 900,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+const StyledTableCell = withStyles((theme: Theme) =>
+  createStyles({
+    head: {
+      backgroundColor: "#B2B2B2",
+      color: theme.palette.common.black,
+      fontSize: 22,
+      fontWeight: 900
+
+    },
+    body: {
+      fontSize: 14,
+    },
+  }),
+)(TableCell);
+
+// const StyledTableCell = withStyles((theme: Theme) => ({
+//   head: {
+//     backgroundColor: "#B2B2B2",
+//     color: theme.palette.common.black,
+//     fontSize: 22,
+//     fontWeight: 900,
+//   },
+//   body: {
+//     fontSize: 14,
+//   },
+// }))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
@@ -28,6 +43,21 @@ const StyledTableRow = withStyles((theme) => ({
     },
   },
 }))(TableRow);
+
+// const useStyles = makeStyles((theme: Theme) => createStyles({
+//   table: {
+//     minWidth: 700,
+//   },
+//   continentRed: {
+//     color: "red",
+//   },
+//   continentBlue: {
+//     color: "blue",
+//   },
+//   continentGreen: {
+//     color: "green",
+//   },
+// }));
 
 const useStyles = makeStyles({
   table: {
@@ -44,7 +74,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CasesList = (props) => {
+const CasesList = (props: any) => {
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -61,27 +91,27 @@ const CasesList = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.cases.map((data) => (
+          {props.cases.map((data: any) => (
             <StyledTableRow key={Object.keys(data)[0]}>
               <StyledTableCell
                 component="th"
                 className={
-                  data[Object.keys(data)].continent === "North America"
+                  data[Object.keys(data)[0]].continent === "North America"
                     ? classes.continentRed
                     :
-                  data[Object.keys(data)].continent === "Central America"
+                  data[Object.keys(data)[0]].continent === "Central America"
                     ? classes.continentRed
-                    : data[Object.keys(data)].continent === "South America"
+                    : data[Object.keys(data)[0]].continent === "South America"
                     ? classes.continentBlue
-                    : data[Object.keys(data)].continent === "Europe"
+                    : data[Object.keys(data)[0]].continent === "Europe"
                     ? classes.continentGreen
-                    : data[Object.keys(data)].continent === "Southern Europe"
+                    : data[Object.keys(data)[0]].continent === "Southern Europe"
                     ? classes.continentGreen
-                    : data[Object.keys(data)].continent === "Western Europe"
+                    : data[Object.keys(data)[0]].continent === "Western Europe"
                     ? classes.continentGreen
-                    : data[Object.keys(data)].continent === "Eastern Europe"
+                    : data[Object.keys(data)[0]].continent === "Eastern Europe"
                     ? classes.continentGreen
-                    : null
+                    : undefined
                 }
                 scope="row"
                 style={{ fontSize: 15, fontWeight: 500 }}
@@ -89,28 +119,28 @@ const CasesList = (props) => {
                 {Object.keys(data)[0]}
               </StyledTableCell>
               <StyledTableCell align="center">
-                {data[Object.keys(data)].confirmed}
+                {data[Object.keys(data)[0]].confirmed}
               </StyledTableCell>
               <StyledTableCell align="center">
-                {data[Object.keys(data)].recovered}
+                {data[Object.keys(data)[0]].recovered}
               </StyledTableCell>
               <StyledTableCell align="center">
-                {data[Object.keys(data)].deaths}
+                {data[Object.keys(data)[0]].deaths}
               </StyledTableCell>
               <StyledTableCell align="center">
-                {data[Object.keys(data)].population}
+                {data[Object.keys(data)[0]].population}
               </StyledTableCell>
               <StyledTableCell align="center">
                 {Math.round(
-                  (data[Object.keys(data)].confirmed /
-                    data[Object.keys(data)].population) *
+                  (data[Object.keys(data)[0]].confirmed /
+                    data[Object.keys(data)[0]].population) *
                     1000000
                 )}
               </StyledTableCell>
               <StyledTableCell align="center">
                 {Math.round(
-                  (data[Object.keys(data)].deaths /
-                    data[Object.keys(data)].population) *
+                  (data[Object.keys(data)[0]].deaths /
+                    data[Object.keys(data)[0]].population) *
                     1000000
                 )}
               </StyledTableCell>
@@ -146,3 +176,6 @@ const CasesList = (props) => {
 };
 
 export default CasesList;
+
+
+

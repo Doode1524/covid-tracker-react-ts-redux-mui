@@ -1,61 +1,45 @@
 import React, { useState, useEffect } from "react";
-import CasesList from "../components/CasesList";
-import { connect, useDispatch } from "react-redux";
-import { getCases } from "../actions";
+import VaccineList from "../components/VaccineList";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { getCases, getVaccines } from "../actions";
+import { RootState } from "../reducers/casesReducer";
 
-// JSX.ElementChildrenAttribute  => props
+const Vaccines = () => {
 
-const Cases = (props) => {
-  
+  const vaccines = useSelector((state: RootState) => state.vaccines)
+  const cases = useSelector((state: RootState) => state.cases)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatchGetCases();
+    dispatchGetVaccines();
   }, []);
 
   const dispatchGetCases = () => {
     dispatch(getCases());
   };
 
-  if (props.cases.length === 0) {
+  const dispatchGetVaccines = () => {
+    dispatch(getVaccines());
+  };
+
+  if (cases.length === 0) {
     return <div>Loading</div>;
   }
 
   return (
     <div>
-      <CasesList cases={props.cases} />
+      <VaccineList cases={cases} vaccines={vaccines} />
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cases: state.cases,
-  };
-};
+// const mapStateToProps = (state: RootState) => {
+//   return {
+//     cases: state.cases,
+//     vaccines: state.vaccines,
+//   };
+// };
 
-export default connect(mapStateToProps, null)(Cases);
-
-//  countries.map(data => {
-//   console.log(Object.keys(data)[0])
-//   return data[Object.keys(data)]
-// })
-
-// let newCases = [];
-// console.log(Object.keys(data), 'keys')
-// let arrVals = Object.values(data)
-// console.log(arrVals, 'values')
-// Object.entries(data).map((d) => newCases.push(d));
-// setCases(arrVals);
-// console.log(data);
-
-// console.log(cases);
-
-// fetch("https://covid-api.mmediagroup.fr/v1/cases")
-//   .then((res) => res.json())
-//   .then((data) => {
-//     let countries = Object.entries(data).map((country) => ({
-//       [country[0]]: country[1].All,
-//     }));
-//     setCases(countries);
-//   });
+export default Vaccines

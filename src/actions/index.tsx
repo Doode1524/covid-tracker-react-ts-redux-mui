@@ -4,7 +4,7 @@ import { IAction, Dispatch, ICountry } from '../interfaces'
 
 export const getCases = () => async (dispatch: Dispatch) => {
   const response = await axios.get("https://covid-api.mmediagroup.fr/v1/cases");
-  let countries = Object.entries(response.data).map((country) => ({
+  let countries = Object.entries(response.data).map((country: any) => ({
     [country[0]]: country[1].All,
   }));
   dispatch({ type: GET_CASES, payload: countries });
@@ -12,7 +12,7 @@ export const getCases = () => async (dispatch: Dispatch) => {
 
 export const getVaccines = () => async (dispatch: Dispatch) => {
   const response = await axios.get("https://covid-api.mmediagroup.fr/v1/vaccines");
-  let countries = Object.entries(response.data).map((country) => ({
+  let countries = Object.entries(response.data).map((country: any) => ({
     [country[0]]: country[1].All,
   }));
   dispatch({ type: GET_VACCINES, payload: countries });

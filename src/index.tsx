@@ -7,12 +7,11 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 import casesReducer from "./reducers/casesReducer";
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
   casesReducer,
-  composeEnhancers(applyMiddleware(reduxThunk))
+  composeWithDevTools(applyMiddleware(reduxThunk))
 );
 
 ReactDOM.render(
