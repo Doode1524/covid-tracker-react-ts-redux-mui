@@ -1,59 +1,26 @@
-import React, { useState, useEffect } from "react";
-import CasesList from "../components/CasesList";
-import { connect, useDispatch } from "react-redux";
-import { getCases } from "../actions";
+import { GET_CASES, GET_VACCINES } from "../actions/types";
+import { IAction, Dispatch, ICountry } from '../interfaces'
 
-const Cases = (props) => {
-  
-  const dispatch = useDispatch();
+const INITIAL_STATE = { cases: [], vaccines: [] };
 
-  useEffect(() => {
-    dispatchGetCases();
-  }, []);
-
-  const dispatchGetCases = () => {
-    dispatch(getCases());
-  };
-
-  if (props.cases.length === 0) {
-    return <div>Loading</div>;
+export default (state = INITIAL_STATE, action: IAction) => {
+  switch (action.type) {
+    case GET_CASES:
+      return { ...state, cases: action.payload };
+    case GET_VACCINES:
+      return { ...state, vaccines: action.payload };
+    default:
+      return state;
   }
-
-  return (
-    <div>
-      <CasesList cases={props.cases} />
-    </div>
-  );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cases: state.cases,
-  };
-};
-
-export default connect(mapStateToProps, null)(Cases);
-
-//  countries.map(data => {
-//   console.log(Object.keys(data)[0])
-//   return data[Object.keys(data)]
-// })
-
-// let newCases = [];
-// console.log(Object.keys(data), 'keys')
-// let arrVals = Object.values(data)
-// console.log(arrVals, 'values')
-// Object.entries(data).map((d) => newCases.push(d));
-// setCases(arrVals);
-// console.log(data);
-
-// console.log(cases);
-
-// fetch("https://covid-api.mmediagroup.fr/v1/cases")
-//   .then((res) => res.json())
-//   .then((data) => {
-//     let countries = Object.entries(data).map((country) => ({
-//       [country[0]]: country[1].All,
-//     }));
-//     setCases(countries);
-//   });
+// const getCases = () => {
+//     fetch("https://covid-api.mmediagroup.fr/v1/cases")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         let countries = Object.entries(data).map((country) => ({
+//           [country[0]]: country[1].All,
+//         }));
+//         setCases(countries);
+//       });
+//   };
