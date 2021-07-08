@@ -23,18 +23,6 @@ const StyledTableCell = withStyles((theme: Theme) =>
   }),
 )(TableCell);
 
-// const StyledTableCell = withStyles((theme: Theme) => ({
-//   head: {
-//     backgroundColor: "#B2B2B2",
-//     color: theme.palette.common.black,
-//     fontSize: 22,
-//     fontWeight: 900,
-//   },
-//   body: {
-//     fontSize: 14,
-//   },
-// }))(TableCell);
-
 const StyledTableRow = withStyles((theme) => ({
   root: {
     backgroundColor: "#E9E3E6",
